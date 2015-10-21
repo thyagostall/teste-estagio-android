@@ -1,7 +1,7 @@
 #PROBLEMAS
 
 
-Este teste consiste em inicialmente seguir todo o passo a passo do [README](https://github.com/FourItil/teste-estagio-java/blob/master/README.md) e a resolução dos itens abaixo.
+Este teste consiste em inicialmente seguir todo o passo a passo do [README](https://github.com/FourItil/teste-estagio-android/blob/master/README.md) e a resolução dos itens abaixo.
 
 ## Problema 1:
 
