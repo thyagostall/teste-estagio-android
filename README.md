@@ -70,7 +70,7 @@ Fork passo 2 - selecionando seu perfil
 
 Pronto, agora que você já tem este teste em seu perfil, basta trabalhar na resolução do mesmo e enviar dentro do prazo estabelecido.
 
-Resolva os problemas do arquivo [PROBLEMAS.md](https://github.com/FourItil/teste-estagio-javascript/blob/master/PROBLEMAS.md)
+Resolva os problemas do arquivo [PROBLEMAS.md](https://github.com/FourItil/teste-estagio-android/blob/master/PROBLEMAS.md)
 
 
 
