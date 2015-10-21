@@ -18,16 +18,8 @@ public class Webservice {
 
     public Boolean isJson(String str) {
 
-        try {
-            new JSONObject(str);
-        } catch (JSONException ex) {
-            try {
-                new JSONArray(str);
-            } catch (JSONException ex1) {
-                return false;
-            }
-        }
-        return true;
+        // PROBLEMA 1: sempre retorna false, valide se é possível converter a resposta em um objeto JSON
+        return false;
     }
 
 

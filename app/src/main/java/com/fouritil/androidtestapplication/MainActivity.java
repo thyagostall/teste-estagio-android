@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                     mJsonArray = jsonObject.getJSONArray("content");
 
                     /*
-                        PROBLEMA 1: a intenção é popular a spinner com os dados da resposta da API.
+                        PROBLEMA 2: a intenção é popular a spinner com os dados da resposta da API.
 
                         Além de possuir alguns erros (descritos abaixo) no método populateSpinner(), ao compilarmos o App
                         temos um erro que em resumo informa que uma Thread não pode manipular views...
@@ -73,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
 
     /*
 
-        PROBLEMA 2: realize os devidos tratamentos para objetos JSON
+        PROBLEMA 3: realize os devidos tratamentos para objetos JSON
 
-        PROBLEMA 3: Adicione cada um dos elementos processados no spinner
+        PROBLEMA 4: Adicione cada um dos elementos processados no spinner
 
      */
 
