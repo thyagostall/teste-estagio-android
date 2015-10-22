@@ -18,11 +18,50 @@ public class MainActivity extends AppCompatActivity {
 
     private Spinner mSpinner;
     private JSONArray mJsonArray;
-    private ArrayAdapter<String> mAdapter;
+    private ArrayAdapter<Concessionaria> mAdapter;
     private TextView mSelectedStore;
 
-    private ArrayList<String> initialArray = new ArrayList<String>();
+    private ArrayList<Concessionaria> initialArray = new ArrayList<Concessionaria>();
 
+    public static class Concessionaria {
+        private int id;
+        private String title;
+
+        private static Concessionaria NULL_ITEM = new Concessionaria(-1, "");
+
+        public Concessionaria(int _id, String _title) {
+            this.id = _id;
+            this.title = _title;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        @Override
+        public String toString() {
+            if (this.id == -1)
+                return "Selecione um item";
+            else
+                return String.format("%d (%s)", this.id, this.title);
+        }
+
+        public static Concessionaria fromJson(JSONObject src) {
+            return new Concessionaria(src.optInt("id"), src.optString("title"));
+        }
+
+        public static Concessionaria getNullObject() {
+            return NULL_ITEM;
+        }
+
+        public static boolean isNullItem(Object obj) {
+            return (obj == NULL_ITEM);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Corrija este erro.
                      */
+
                     populateSpinner();
 
                 } catch (JSONException e) {
@@ -83,19 +123,29 @@ public class MainActivity extends AppCompatActivity {
 
         int total = mJsonArray.length();
 
-        mAdapter.add("Selecione um item");
+        mAdapter.add(Concessionaria.getNullObject());
         for (int i = 0; i < total; i++) {
 
             // Realize os corretos tratamentos para manipulação de objetos JSON
-            JSONObject item = (JSONObject) mJsonArray.get(i);
+            try {
+                JSONObject rawItem = (JSONObject) mJsonArray.get(i);
+                Concessionaria item = Concessionaria.fromJson(rawItem);
 
-            mAdapter.add(item.getString("title"));
+                mAdapter.add(item);
+            } catch (JSONException e) {
+
+            }
         }
 
         mSpinner = (Spinner) findViewById(R.id.spinner);
-        mSpinner.setAdapter(mAdapter);
+        mSpinner.post(new Runnable() {
+            @Override
+            public void run() {
+                mSpinner.setAdapter(mAdapter);
 
-        setItemSelectionListener();
+                setItemSelectionListener();
+            }
+        });
     }
 
     private void setItemSelectionListener() {
@@ -106,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String selected = mSpinner.getSelectedItem().toString();
 
-                if (selected == "Selecione um item") {
+                if (selected.equals("Selecione um item")) {
                     selected = "Nada selecionado";
                 }
                 mSelectedStore = (TextView) findViewById(R.id.textView3);

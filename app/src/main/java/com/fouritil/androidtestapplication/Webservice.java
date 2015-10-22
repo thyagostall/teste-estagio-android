@@ -8,6 +8,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.IOException;
 
@@ -17,9 +18,16 @@ import java.io.IOException;
 public class Webservice {
 
     public Boolean isJson(String str) {
+        try {
+            Object json = new JSONTokener(str).nextValue();
 
-        // PROBLEMA 1: sempre retorna false, valide se é possível converter a resposta em um objeto JSON
-        return false;
+            if (json instanceof JSONObject || json instanceof JSONArray)
+                return true;
+            else
+                return false;
+        } catch (JSONException e) {
+            return false;
+        }
     }
 
 
